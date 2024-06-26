@@ -101,11 +101,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getInvoices: async () => {
+				console.log("Running")
 				const store = getStore()
 				console.log(store)
 				const options = {
 					method: 'GET',
-					mode: 'cors',
+					// mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json',
 						'Authorization': `Bearer ${store.token}`
@@ -118,12 +119,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`${process.env.BACKEND_URL}api/invoices`, options)
 
 				if(!response.ok) {
-					return {
-						error: {
+					console.log(	
+						{
 							status: response.status,
 							statusText: response.statusText
 						}
-					}
+					)
+					return false;
 				}
 				const data = await response.json()
 				setStore({
@@ -131,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					invoiceMessage: data.msg
 				})
 				console.log(data.msg, data.invoices)
-				return data;
+				return true;
 			},
 		}
 	};

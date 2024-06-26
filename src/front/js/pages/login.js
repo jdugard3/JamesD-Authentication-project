@@ -1,4 +1,4 @@
-// This page with accept a user's email and password 
+// This page will accept a user's email and password 
 // Create a function in flux which will make a POST request with users info in body 
 // SUCCESS means:
 // 1. The user is already registered and in the DB
@@ -12,6 +12,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import '../../styles/login.css'
 
 export const Login = () => {
     const [ email, setEmail ] = useState("");
